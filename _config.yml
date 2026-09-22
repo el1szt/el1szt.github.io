@@ -96,9 +96,40 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: cyanstyle
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+# Header
+menu:
+  Home: /
+  Archives: /archives
+
+# Content
+excerpt_link: More
+prev: Prev
+next: Next
+reply: Reply
+share: Share
+fancybox: true
+
+# Sidebar
+widgets:
+- search
+- music
+- category
+- recent_posts
+- tag
+- tagcloud
+
+# Miscellaneous
+google_analytics:
+duoshuo_shortname: 
+rss: 
+google_site_verification: 
+baidu_site_verification: 
+favicon: 
+music: 
