@@ -589,7 +589,7 @@ a:hover {
 
 /* Backgroud image */
 #bg {
-  background-image: url("images/body.jpg");
+  background-image: url("images/new.png");
   background-color: #050a10;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -1968,4 +1968,46 @@ img#wpstats {
 		margin-left: 50px;
 		margin-left: 3.57142857rem;
 	}
+}
+
+/* Keep the background and content in a shared stacking context */
+body {
+  isolation: isolate;
+}
+
+/* Full-screen background, outside the glass panel */
+#bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+
+  /* Retain the background-image set earlier in this stylesheet */
+  background-color: rgba(0, 0, 0, 0.2);
+  background-blend-mode: multiply;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Readable fallback for browsers without backdrop-filter */
+#page.site {
+  position: relative;
+  z-index: 0;
+  background-color: rgba(245, 248, 250, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 18px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+}
+
+/* Frosted glass on supported browsers */
+@supports ((backdrop-filter: blur(18px)) or
+           (-webkit-backdrop-filter: blur(18px))) {
+  #page.site {
+    background-color: rgba(245, 248, 250, 0.35);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+  }
 }

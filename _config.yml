@@ -133,3 +133,8 @@ google_site_verification:
 baidu_site_verification: 
 favicon: 
 music: 
+
+# Theme_config
+theme_config:
+  favicon: /images/favicon.ico
+  music: "/music/SAIKAI-Mili.mp3"
