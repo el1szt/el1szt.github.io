@@ -2011,3 +2011,61 @@ body {
     backdrop-filter: blur(18px);
   }
 }
+
+/* Code blocks: solid background and dark text */
+.entry-content figure.highlight,
+.entry-content pre {
+  background: #f1f5f9;
+  color: #1e293b;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+}
+
+/* Prevent the table styles from making code text gray */
+.entry-content figure.highlight table,
+.entry-content figure.highlight td {
+  color: #1e293b;
+  background: transparent;
+}
+
+/* Remove duplicate boxes inside highlighted code */
+.entry-content figure.highlight pre {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: #1e293b;
+  padding: 0;
+  margin: 0;
+}
+
+.entry-content pre code {
+  color: inherit;
+  background: transparent;
+}
+
+/* Line numbers */
+.entry-content figure.highlight .gutter {
+  color: #64748b;
+  border-right-color: #cbd5e1;
+}
+
+/* Keep code and its nested spans in a monospace font */
+.entry-content pre,
+.entry-content pre *,
+.entry-content figure.highlight .line {
+  font-family: Consolas, Monaco, "Courier New", monospace;
+}
+
+/* Blockquotes: dark text and a softly tinted background */
+.entry-content blockquote {
+  color: #334155;
+  background: #edf4f5;
+  border-left: 4px solid #397b80;
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px;
+}
+
+.entry-content blockquote a {
+  color: #21656b;
+  text-decoration: underline;
+}
