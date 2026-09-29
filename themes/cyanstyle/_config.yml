@@ -13,8 +13,6 @@ fancybox: true
 
 # Sidebar
 widgets:
-- search
-- music
 - category
 - recent_posts
 - tag

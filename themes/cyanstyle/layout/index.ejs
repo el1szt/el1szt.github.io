@@ -1,1 +1,34 @@
-<%- partial('_partial/archive', {pagination: 2, index: true}) %>
+<% page.posts.each(function(post){ %>
+  <%
+    var previewSource = post.description || post.excerpt || '';
+    var previewText = strip_html(previewSource).replace(/\s+/g, ' ').trim();
+    var preview = truncate(previewText, {
+      length: 160,
+      omission: '…'
+    });
+  %>
+
+  <article class="post type-post hentry home-title-item">
+    <header class="entry-header">
+      <h2 class="entry-title">
+        <a href="<%- url_for(post.path) %>">
+          <%= post.title || '未命名文章' %>
+        </a>
+      </h2>
+    </header>
+
+    <% if (preview) { %>
+      <p class="home-post-preview"><%= preview %></p>
+    <% } %>
+
+  </article>
+<% }) %>
+
+<% if (page.total > 1){ %>
+  <nav id="pagination">
+    <%- paginator({
+      prev_text: '« 上一页',
+      next_text: '下一页 »'
+    }) %>
+  </nav>
+<% } %>

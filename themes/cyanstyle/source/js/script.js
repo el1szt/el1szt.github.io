@@ -1,4 +1,8 @@
 (function($) {
+    function initializePage() {
+    var page = document.getElementById('page');
+    if (!page || page.dataset.cyanReady) return;
+    page.dataset.cyanReady = 'true';
     // Search
     var $searchWrap = $('#search-form-wrap'),
         isSearchAnim = false,
@@ -64,18 +68,15 @@
     // Caption
     $('.article-entry').each(function(i) {
         $(this).find('img').each(function() {
-            if ($(this).parent().hasClass('fancybox')) return;
+            if ($(this).closest('a').length) return;
             var alt = this.alt;
-            if (alt) $(this).after('<span class="caption">' + alt + '</span>');
-            $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+            if (alt) $(this).after($('<span class="caption">').text(alt));
+            $(this).wrap($('<a>').attr({href: this.src, title: alt, 'class': 'fancybox'}));
         });
         $(this).find('.fancybox').each(function() {
             $(this).attr('rel', 'article' + i);
         });
     });
-    if ($.fancybox) {
-        $('.fancybox').fancybox();
-    }
     // Mobile nav
     var $container = $('#container'),
         isMobileNavAnim = false,
@@ -118,17 +119,20 @@
             var $imageWrapLink = $image.parent('a');
             if ($imageWrapLink.length < 1) {
                 var imageLink = $image.attr('data-original') ? this.getAttribute('data-original') : this.getAttribute('src');
-                $imageWrapLink = $image.wrap('<a data-fancybox="group" href="' + imageLink + '"></a>').parent('a');
+                $imageWrapLink = $image.wrap($('<a>').attr({'data-fancybox': 'group', href: imageLink})).parent('a');
             }
+            if (!$imageWrapLink.hasClass('fancybox') && $imageWrapLink.attr('href') !== $image.attr('src') &&
+                $imageWrapLink.attr('href') !== $image.attr('data-original')) return;
             $imageWrapLink.addClass('fancybox fancybox.image');
             $imageWrapLink.attr('rel', 'group');
-            if (imageTitle) {
-                $imageWrapLink.append('<p class="image-caption">' + imageTitle + '</p>');
+            if (imageTitle && !$imageWrapLink.children('.image-caption').length) {
+                $imageWrapLink.append($('<p class="image-caption">').text(imageTitle));
                 //make sure img title tag will show correctly in fancybox
                 $imageWrapLink.attr('title', imageTitle);
             }
         });
-        $('.fancybox').fancybox({
+        if ($.fn.fancybox) $('.fancybox').fancybox({
+            live: false,
             helpers: {
                 overlay: {
                     locked: false
@@ -137,4 +141,7 @@
         });
     }
     wrapImageWithFancyBox();
+    }
+    initializePage();
+    document.addEventListener('cyan:page-ready', initializePage);
 })(jQuery);

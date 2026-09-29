@@ -3,6 +3,7 @@
  * accessibility for submenu items.
  */
 (function() {
+	function initializeNavigation() {
 	var nav = document.getElementById('site-navigation'),
 		button, menu;
 	if (!nav) {
@@ -29,12 +30,18 @@
 			button.className += ' toggled-on';
 			menu.className += ' toggled-on';
 		}
+		button.setAttribute('aria-expanded', String(menu.classList.contains('toggled-on')));
 	};
+	button.setAttribute('aria-controls', menu.id);
+	button.setAttribute('aria-expanded', String(menu.classList.contains('toggled-on')));
+	}
+	initializeNavigation();
+	document.addEventListener('cyan:page-ready', initializeNavigation);
 })();
 // Better focus for hidden submenu items for accessibility.
 (function($) {
-	$('.main-navigation').find('a').on('focus.twentytwelve blur.twentytwelve', function() {
-		$(this).parents('.menu-item, .page_item').toggleClass('focus');
+	$(document).on('focusin.twentytwelve focusout.twentytwelve', '.main-navigation a', function(event) {
+		$(this).parents('.menu-item, .page_item').toggleClass('focus', event.type === 'focusin');
 	});
 	if ('ontouchstart' in window) {
 		$('body').on('touchstart.twentytwelve', '.menu-item-has-children > a, .page_item_has_children > a', function(e) {

@@ -1,5 +1,5 @@
 <%- partial('_partial/head') %>
-<body class="home blog custom-background custom-font-enabled single-author">
+<body class="home blog custom-background custom-font-enabled single-author<% if (theme.music) { %> has-site-music<% } %>">
   <div id="bg" aria-hidden="true"></div>
 
   <div id="page" class="hfeed site">
@@ -9,7 +9,28 @@
         <%- partial('_partial/sidebar', null, {cache: !config.relative_link}) %>
       </div>
       <%- partial('_partial/footer', null, {cache: !config.relative_link}) %>
-    <%- partial('_partial/after-footer') %>
   </div>
+
+  <% if (theme.music) { %>
+    <div id="site-music-player" role="region" aria-label="音乐播放器">
+      <button id="music-toggle" type="button" aria-label="展开音乐播放器" aria-expanded="false" aria-controls="music-panel">
+        <span aria-hidden="true">♪</span>
+      </button>
+      <div id="music-panel" hidden>
+      <span class="music-player-label">背景音乐</span>
+      <button id="music-close" type="button" aria-label="收起音乐播放器" aria-controls="music-panel">收起 <span aria-hidden="true">⌄</span></button>
+      <audio
+        id="site-audio"
+        aria-label="背景音乐播放控制"
+        src="<%= theme.music %>"
+        controls
+        loop
+        preload="none">
+        您的浏览器不支持音频播放。
+      </audio>
+      </div>
+    </div>
+  <% } %>
+  <%- partial('_partial/after-footer') %>
 </body>
 </html>

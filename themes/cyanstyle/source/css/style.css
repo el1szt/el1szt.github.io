@@ -2069,3 +2069,141 @@ body {
   color: #21656b;
   text-decoration: underline;
 }
+
+/* Compact title list on the home page */
+.site-content article.home-title-item {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.home-title-item .entry-header h2 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+/* Home page article previews */
+.home-title-item .home-post-preview {
+  margin: 12px 0 14px;
+  color: #334155;
+  font-size: 14px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.home-title-item .home-read-more {
+  display: inline-block;
+  color: #21656b;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.home-title-item .home-read-more:hover,
+.home-title-item .home-read-more:focus-visible {
+  text-decoration: underline;
+}
+
+/* Player tokens extend the existing teal / frosted-glass palette. */
+:root {
+  --music-ink: #21656b;
+  --music-surface: rgba(245, 248, 250, 0.96);
+  --music-glass: rgba(237, 244, 245, 0.88);
+  --music-border: rgba(81, 165, 168, 0.5);
+  --music-highlight: #edf4f5;
+  --music-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --music-space-sm: 8px;
+  --music-space-md: 12px;
+  --music-space-lg: 24px;
+  --music-radius: 18px;
+  --music-round: 50%;
+  --music-border-width: 1px;
+  --music-focus-width: 3px;
+  --music-focus-offset: 4px;
+  --music-control-size: 56px;
+  --music-close-size: 44px;
+  --music-audio-height: 54px;
+  --music-max-width: 720px;
+  --music-font: 1rem;
+  --music-icon: 2rem;
+  --music-blur: 18px;
+  --music-transition: 160ms ease;
+  --music-clearance: 96px;
+  --music-panel-clearance: 156px;
+}
+body.has-site-music {
+  padding-bottom: calc(var(--music-clearance) + env(safe-area-inset-bottom, 0px));
+}
+body.music-is-open {
+  padding-bottom: calc(var(--music-panel-clearance) + env(safe-area-inset-bottom, 0px));
+}
+#site-music-player {
+  position: fixed;
+  right: calc(var(--music-space-lg) + env(safe-area-inset-right, 0px));
+  bottom: calc(var(--music-space-lg) + env(safe-area-inset-bottom, 0px));
+  z-index: 1000;
+  color: var(--music-ink);
+}
+#site-music-player [hidden] { display: none; }
+#site-music-player button {
+  color: var(--music-ink);
+  background: var(--music-surface);
+  border: var(--music-border-width) solid var(--music-border);
+  box-shadow: none;
+  font-size: var(--music-font);
+  transition: background var(--music-transition);
+}
+#site-music-player button:hover { background: var(--music-highlight); }
+#site-music-player button:focus-visible,
+#site-audio:focus-visible {
+  outline: var(--music-focus-width) solid var(--music-ink);
+  outline-offset: var(--music-focus-offset);
+}
+#site-music-player #music-toggle {
+  width: var(--music-control-size);
+  height: var(--music-control-size);
+  padding: 0;
+  border-radius: var(--music-round);
+  font-size: var(--music-icon);
+  box-shadow: var(--music-shadow);
+}
+#music-panel {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--music-space-sm) var(--music-space-md);
+  width: min(var(--music-max-width), calc(100vw - var(--music-space-lg) * 2 - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)));
+  box-sizing: border-box;
+  padding: var(--music-space-md);
+  border: var(--music-border-width) solid var(--music-border);
+  border-radius: var(--music-radius);
+  background: var(--music-surface);
+  box-shadow: var(--music-shadow);
+}
+.music-player-label { font-size: var(--music-font); }
+#music-close {
+  min-height: var(--music-close-size);
+  padding: var(--music-space-sm) var(--music-space-md);
+  border-radius: var(--music-radius);
+}
+#site-audio {
+  display: block;
+  grid-column: 1 / -1;
+  width: 100%;
+  min-width: 0;
+  height: var(--music-audio-height);
+}
+@supports (backdrop-filter: blur(1px)) {
+  #music-panel, #site-music-player #music-toggle {
+    background: var(--music-glass);
+    backdrop-filter: blur(var(--music-blur));
+    -webkit-backdrop-filter: blur(var(--music-blur));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #site-music-player button { transition: none; }
+}
+@media print {
+  #site-music-player { display: none; }
+  body.has-site-music { padding-bottom: 0; }
+}
