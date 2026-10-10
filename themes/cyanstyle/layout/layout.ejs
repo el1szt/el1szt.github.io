@@ -11,26 +11,83 @@
       <%- partial('_partial/footer', null, {cache: !config.relative_link}) %>
   </div>
 
-  <% if (theme.music) { %>
-    <div id="site-music-player" role="region" aria-label="音乐播放器">
-      <button id="music-toggle" type="button" aria-label="展开音乐播放器" aria-expanded="false" aria-controls="music-panel">
-        <span aria-hidden="true">♪</span>
-      </button>
-      <div id="music-panel" hidden>
-      <span class="music-player-label">背景音乐</span>
-      <button id="music-close" type="button" aria-label="收起音乐播放器" aria-controls="music-panel">收起 <span aria-hidden="true">⌄</span></button>
+<% if (theme.music) { %>
+  <div id="site-music-player" role="region" aria-label="音乐播放器">
+
+    <!-- 保留原来的收纳音符 -->
+    <button
+      id="music-toggle"
+      type="button"
+      aria-label="展开音乐播放器"
+      aria-expanded="false"
+      aria-controls="music-panel">
+      <span aria-hidden="true">♪</span>
+    </button>
+
+    <div id="music-panel" hidden>
+      <input
+        id="music-progress"
+        type="range"
+        min="0"
+        max="1000"
+        value="0"
+        step="1"
+        disabled
+        aria-label="播放进度">
+
+      <div class="music-track">
+        <% if (theme.music_cover) { %>
+          <img
+            class="music-cover"
+            src="<%= theme.music_cover %>"
+            alt="">
+        <% } else { %>
+          <span class="music-cover music-cover-placeholder"
+                aria-hidden="true">♪</span>
+        <% } %>
+
+        <div class="music-track-text">
+          <div class="music-track-title">
+            <%= theme.music_title || '背景音乐' %>
+          </div>
+          <div class="music-track-artist">
+            <%= theme.music_artist || config.title %>
+          </div>
+        </div>
+      </div>
+
+      <div class="music-controls">
+        <span id="music-time">0:00 / 0:00</span>
+
+        <button id="music-back" type="button"
+                aria-label="后退10秒" title="后退10秒">−10s</button>
+
+        <button id="music-play" type="button"
+                aria-label="播放" title="播放">
+          <span aria-hidden="true">▶</span>
+        </button>
+
+        <button id="music-forward" type="button"
+                aria-label="前进10秒" title="前进10秒">+10s</button>
+
+        <button id="music-close" type="button"
+                aria-label="收起音乐播放器"
+                aria-controls="music-panel"
+                title="收起">⌄</button>
+      </div>
+
+      <span id="music-status" role="status" aria-live="polite"></span>
+
       <audio
         id="site-audio"
-        aria-label="背景音乐播放控制"
         src="<%= theme.music %>"
-        controls
         loop
-        preload="none">
-        您的浏览器不支持音频播放。
+        preload="metadata"
+        hidden>
       </audio>
-      </div>
     </div>
-  <% } %>
+  </div>
+<% } %>
   <%- partial('_partial/after-footer') %>
 </body>
 </html>
