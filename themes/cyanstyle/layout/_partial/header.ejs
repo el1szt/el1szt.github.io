@@ -3,16 +3,15 @@
       <h1 class="site-title">
         <a href="<%- url_for() %>" title="<%= config.title %>" rel="home"><%= config.title %></a>
       </h1>
-      <% if (theme.subtitle){ %>
-        <h2 class="site-description">
-          <a href="<%- url_for() %>" id="subtitle"><%= theme.subtitle %></a>
-        </h2>
+      <% var description = theme.subtitle || config.description || config.subtitle; %>
+      <% if (description){ %>
+        <p class="site-description" id="subtitle"><%= description %></p>
       <% } %>
     </hgroup>
 
-    <nav id="site-navigation" class="main-navigation" role="navigation">
-            <button class="menu-toggle">菜单</button>
-            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+    <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="主导航">
+            <button class="menu-toggle" type="button" aria-controls="menu-main" aria-expanded="false">菜单</button>
+            <a class="assistive-text" href="#content" title="跳至内容">跳至内容</a>
             <div class="menu-main-container">
                 <ul id="menu-main" class="nav-menu">
                 <% for (var i in theme.menu){ %>

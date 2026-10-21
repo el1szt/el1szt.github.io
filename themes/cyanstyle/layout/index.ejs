@@ -1,3 +1,4 @@
+<div class="home-post-list">
 <% page.posts.each(function(post){ %>
   <%
     var previewSource = post.description || post.excerpt || '';
@@ -15,6 +16,7 @@
           <%= post.title || '未命名文章' %>
         </a>
       </h2>
+      <time class="home-post-date" datetime="<%= date_xml(post.date) %>">发布于 <%= date(post.date, config.date_format) %></time>
     </header>
 
     <% if (preview) { %>
@@ -32,3 +34,4 @@
     }) %>
   </nav>
 <% } %>
+</div>

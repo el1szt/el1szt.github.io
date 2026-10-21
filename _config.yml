@@ -119,6 +119,5 @@ theme_config:
 
   widgets:
     - category
-    - recent_posts
     - tag
     - tagcloud

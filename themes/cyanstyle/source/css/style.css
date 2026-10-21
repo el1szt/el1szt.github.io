@@ -18,7 +18,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
 /*
 Color Scheme
-Main Page: 255, 255, 255, 0.2
+Main Page: 255, 255, 255
 Main Title:
   Normal: 0, 0, 0 *
   Hover: 81, 165, 168 (Lake Green)
@@ -641,7 +641,7 @@ a:hover {
 .site {
 	padding: 0 24px;
 	padding: 0 1.714285714rem;
-	background-color: rgba(255, 255, 255, 0.20); /* Main Page */
+	background-color: #fff; /* Main Page */
 }
 .site-content {
 	margin: 24px 0 0;
@@ -1975,12 +1975,15 @@ body {
   isolation: isolate;
 }
 
-/* Full-screen background, outside the glass panel */
+/* Full-screen background, outside the page panel */
 #bg {
+  --wallpaper-blur: 8px;
+  --wallpaper-overscan: 24px;
   position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  inset: calc(0px - var(--wallpaper-overscan));
+  width: calc(100% + var(--wallpaper-overscan) * 2);
+  height: calc(100% + var(--wallpaper-overscan) * 2);
+  filter: blur(var(--wallpaper-blur));
   z-index: -1;
   pointer-events: none;
 
@@ -1990,26 +1993,17 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: scroll;
 }
 
-/* Readable fallback for browsers without backdrop-filter */
+/* Solid white page panel */
 #page.site {
   position: relative;
   z-index: 0;
-  background-color: rgba(245, 248, 250, 0.94);
+  background-color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 18px;
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
-}
-
-/* Frosted glass on supported browsers */
-@supports ((backdrop-filter: blur(18px)) or
-           (-webkit-backdrop-filter: blur(18px))) {
-  #page.site {
-    background-color: rgba(245, 248, 250, 0.35);
-    -webkit-backdrop-filter: blur(18px);
-    backdrop-filter: blur(18px);
-  }
 }
 
 /* Code blocks: solid background and dark text */
@@ -2104,11 +2098,10 @@ body {
   text-decoration: underline;
 }
 
-/* Player tokens extend the existing teal / frosted-glass palette. */
+/* Player tokens extend the existing teal / white palette. */
 :root {
   --music-ink: #21656b;
-  --music-surface: rgba(245, 248, 250, 0.96);
-  --music-glass: rgba(237, 244, 245, 0.88);
+  --music-surface: #fff;
   --music-border: rgba(81, 165, 168, 0.5);
   --music-highlight: #edf4f5;
   --music-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
@@ -2126,7 +2119,6 @@ body {
   --music-max-width: 720px;
   --music-font: 1rem;
   --music-icon: 2rem;
-  --music-blur: 18px;
   --music-transition: 160ms ease;
   --music-clearance: 96px;
   --music-panel-clearance: 156px;
@@ -2192,13 +2184,6 @@ body.music-is-open {
   width: 100%;
   min-width: 0;
   height: var(--music-audio-height);
-}
-@supports (backdrop-filter: blur(1px)) {
-  #music-panel, #site-music-player #music-toggle {
-    background: var(--music-glass);
-    backdrop-filter: blur(var(--music-blur));
-    -webkit-backdrop-filter: blur(var(--music-blur));
-  }
 }
 @media (prefers-reduced-motion: reduce) {
   #site-music-player button { transition: none; }
@@ -2398,8 +2383,8 @@ body.music-is-open #site-music-player {
   }
 
   #music-time,
-  #music-back,
-  #music-forward {
+  #site-music-player .music-controls #music-back,
+  #site-music-player .music-controls #music-forward {
     display: none;
   }
 }

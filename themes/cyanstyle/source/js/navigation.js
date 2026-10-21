@@ -34,6 +34,12 @@
 	};
 	button.setAttribute('aria-controls', menu.id);
 	button.setAttribute('aria-expanded', String(menu.classList.contains('toggled-on')));
+	nav.onkeydown = function(event) {
+		if (event.key === 'Escape' && menu.classList.contains('toggled-on')) {
+			button.click();
+			button.focus();
+		}
+	};
 	}
 	initializeNavigation();
 	document.addEventListener('cyan:page-ready', initializeNavigation);
