@@ -54,9 +54,9 @@ n维数组(以4维5位reg数组reg1为例)：`reg [4:0] reg1 [0:3][0:63][0:15][0
 
 `assign` 语句表示导线的连接关系，等号后的导线将自身内部的值传递给等号前面的导线，如：`assign wire2 = wire1` 将 `wire1` 导线的值传给 `wire2` 
 
-导线间的运算 ~~好累啊不想写~~  
+导线间的运算 
 
-![alt text](图3.4.8：阻塞赋值7-1.png)
+![alt text](/images/Verilog%20Learning/wire.png)
 
 ```verilog
 wire [15:0] wire1;
@@ -206,7 +206,7 @@ assign wire2 = reg1;
 
 Verilog 支持在同一个 `always` 块中给多个 `reg` 型变量赋值，也接受多个寄存器串联在一起的形式，就像这样：
 
-![alt text](图3.4.11：非阻塞赋值3.png)
+![alt text](/images/Verilog%20Learning/reg.png)
 
 写成 Verilog 代码就是：
 
