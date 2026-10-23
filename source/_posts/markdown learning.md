@@ -211,6 +211,7 @@ typescript / ts - TypeScript
 [回到顶部](#)
 
 # 图片
+`![Araya](/images/markdown%20learning/Araya.jpg)`
 
 ![Araya](/images/markdown%20learning/Araya.jpg)
 
