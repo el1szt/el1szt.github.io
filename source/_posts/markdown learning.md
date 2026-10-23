@@ -212,7 +212,7 @@ typescript / ts - TypeScript
 
 # 图片
 
-！[Araya](/images/markdown%20learning/Araya.jpg)
+![Araya](/images/markdown%20learning/Araya.jpg)
 
 # 表格
 
@@ -377,32 +377,36 @@ $$
 使用 matrix 环境：
 
 $$
-    \begin{pmatrix}
-    a & b \\
-    c & d
-    \end{pmatrix}
-    $$
+  \begin{pmatrix}
+  a & b \\
+  c & d
+  \end{pmatrix}
+$$
 
 不同括号类型的矩阵：
 
 pmatrix：圆括号 
+
 $$
-    \begin{pmatrix}
-    a & b \\ 
-    c & d 
-    \end{pmatrix}
-    $$
+  \begin{pmatrix}
+  a & b \\ 
+  c & d 
+  \end{pmatrix}
+$$
 
 bmatrix：方括号 
+
 $$
-    \begin{bmatrix} 
-    a & b \\
-    c & d 
-    \end{bmatrix}
-    $$  
+  \begin{bmatrix} 
+  a & b \\
+  c & d 
+  \end{bmatrix}
+$$  
+
 vmatrix：行列式 
+
 $$
-    \begin{vmatrix} 
-    a & b \\
-    c & d \end{vmatrix}
-    $$
+  \begin{vmatrix} 
+  a & b \\
+  c & d \end{vmatrix}
+$$
